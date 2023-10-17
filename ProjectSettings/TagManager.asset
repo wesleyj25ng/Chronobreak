@@ -1,0 +1,70 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 2
+  tags:
+  - Jewel
+  - TimeBody
+  - TimeManager
+  - Animation
+  - Trap
+  - Out of Bounds
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - 
+  - Water
+  - UI
+  - Background
+  - Ground
+  - Slope
+  - Object
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: Default
+    uniqueID: 0
+    locked: 0
+  - name: Deep Background
+    uniqueID: 3416882551
+    locked: 0
+  - name: Background
+    uniqueID: 2825817175
+    locked: 0
+  - name: Buildings
+    uniqueID: 2373045943
+    locked: 0
+  - name: Building Decoration
+    uniqueID: 2502502547
+    locked: 0
+  - name: Props
+    uniqueID: 2793554793
+    locked: 0
+  - name: Traps
+    uniqueID: 3962647883
+    locked: 0
+  - name: Tiles
+    uniqueID: 3612000365
+    locked: 0
