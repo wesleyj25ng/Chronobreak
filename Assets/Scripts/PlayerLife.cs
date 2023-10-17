@@ -8,12 +8,16 @@ public class PlayerLife : MonoBehaviour
 
     private Animator anim;
     private Rigidbody2D rb;
+    private TimeManager timemanager;
+    private BackgroundMusic bgm;
 
 
     void Start()
     {
         anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
+        timemanager = GameObject.FindGameObjectWithTag("TimeManager").GetComponent<TimeManager>();
+        bgm = FindObjectOfType<BackgroundMusic>();
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -42,5 +46,9 @@ public class PlayerLife : MonoBehaviour
     private void RestartLevel()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        if (timemanager.TimeIsStopped)
+        {
+            bgm.ContinueMusic(); // Unpause the background music if time is stopped
+        }
     }
 }

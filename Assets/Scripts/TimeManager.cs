@@ -7,10 +7,6 @@ public class TimeManager : MonoBehaviour
 {
     public bool TimeIsStopped;
 
-    [SerializeField] private AudioSource freezeTimeSoundEffect;
-    [SerializeField] private AudioSource unfreezeTimeSoundEffect;
-    [SerializeField] private AudioSource tickingSoundEffect;
-
     public void ContinueTime()
     {
         TimeIsStopped = false;
@@ -21,22 +17,19 @@ public class TimeManager : MonoBehaviour
             objects[i].GetComponent<TimeBody>().ContinueTime(); //continue time in each of them
         }
 
-        unfreezeTimeSoundEffect.Play();
-        tickingSoundEffect.Stop();
-        if (freezeTimeSoundEffect.isPlaying)
-        {
-            freezeTimeSoundEffect.Stop();
-        }
+        AudioManager.instance.Play("Unfreeze Time");
+        AudioManager.instance.Stop("Ticking");
+        AudioManager.instance.Stop("Freeze Time");
+        FindObjectOfType<BackgroundMusic>().ContinueMusic();
 
     }
     public void StopTime()
     {
         TimeIsStopped = true;
-        freezeTimeSoundEffect.Play();
-        tickingSoundEffect.Play();
-        if (unfreezeTimeSoundEffect.isPlaying)
-        {
-            unfreezeTimeSoundEffect.Stop();
-        }
+
+        AudioManager.instance.Play("Freeze Time");
+        AudioManager.instance.Play("Ticking");
+        AudioManager.instance.Stop("Unfreeze Time");
+        FindObjectOfType<BackgroundMusic>().PauseMusic();
     }
 }
