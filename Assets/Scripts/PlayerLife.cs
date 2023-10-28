@@ -48,6 +48,7 @@ public class PlayerLife : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         if (timemanager.TimeIsStopped)
         {
+            AudioManager.instance.Stop("Ticking");
             bgm.ContinueMusic(); // Unpause the background music if time is stopped
         }
     }
