@@ -4,6 +4,7 @@ public class BackgroundMusic : MonoBehaviour
 {
     private static BackgroundMusic instance;
     private AudioSource audioSource;
+    private float originalVolume;
 
     void Awake()
     {
@@ -12,6 +13,7 @@ public class BackgroundMusic : MonoBehaviour
             instance = this;
             DontDestroyOnLoad(gameObject);
             audioSource = GetComponent<AudioSource>();
+            originalVolume = audioSource.volume;
         }
         else
         {
@@ -32,6 +34,22 @@ public class BackgroundMusic : MonoBehaviour
         if (audioSource != null && !audioSource.isPlaying)
         {
             audioSource.Play();
+        }
+    }
+
+    public void AdjustVolume()
+    {
+        if (audioSource != null)
+        {
+            if (PauseMenu.GameIsPaused)
+            {
+                audioSource.volume = originalVolume * 0.3f; // Reduce the volume
+            }
+            else if (!PauseMenu.GameIsPaused)
+            {
+                audioSource.volume = originalVolume; // Restore the original volume
+                
+            }
         }
     }
 }
