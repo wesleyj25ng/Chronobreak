@@ -43,13 +43,16 @@ public class PlayerMovement : MonoBehaviour
 
         UpdateAnimation();
 
-        if (Input.GetKeyDown(KeyCode.Q) && !(timemanager.TimeIsStopped)) //Stop Time when Q is pressed
+        if (!PauseMenu.GameIsPaused)
         {
-            timemanager.StopTime();
-        }
-        else if (Input.GetKeyDown(KeyCode.Q) && timemanager.TimeIsStopped)  //Continue Time when E is pressed
-        {
-            timemanager.ContinueTime();
+            if (Input.GetKeyDown(KeyCode.Q) && !(timemanager.TimeIsStopped)) //Stop Time when Q is pressed
+            {
+                timemanager.StopTime();
+            }
+            else if (Input.GetKeyDown(KeyCode.Q) && timemanager.TimeIsStopped)  //Continue Time when E is pressed
+            {
+                timemanager.ContinueTime();
+            }
         }
 
     }
@@ -57,36 +60,39 @@ public class PlayerMovement : MonoBehaviour
     private void UpdateAnimation()
     {
         MovementState state;
-        if (dirX > 0f)
+        if (!PauseMenu.GameIsPaused)
         {
-            ghostTrail.makeGhost = true;
-            state = MovementState.running;
-            transform.localScale = new UnityEngine.Vector3(1.48734f, 1.48734f, 1.48734f);
-        }
-        else if (dirX < 0)
-        {
-            ghostTrail.makeGhost = true;
-            state = MovementState.running;
-            transform.localScale = new UnityEngine.Vector3(-1.48734f, 1.48734f, 1.48734f);
-        }
-        else
-        {
-            ghostTrail.makeGhost = false;
-            state = MovementState.idle;
-        }
+            if (dirX > 0f)
+            {
+                ghostTrail.makeGhost = true;
+                state = MovementState.running;
+                transform.localScale = new UnityEngine.Vector3(1.48734f, 1.48734f, 1.48734f);
+            }
+            else if (dirX < 0)
+            {
+                ghostTrail.makeGhost = true;
+                state = MovementState.running;
+                transform.localScale = new UnityEngine.Vector3(-1.48734f, 1.48734f, 1.48734f);
+            }
+            else
+            {
+                ghostTrail.makeGhost = false;
+                state = MovementState.idle;
+            }
 
-        if (rb.velocity.y > 0.1f)
-        {
-            ghostTrail.makeGhost = true;
-            state = MovementState.jumping;
-        }
-        else if (rb.velocity.y < -0.1f)
-        {
-            ghostTrail.makeGhost = true;
-            state = MovementState.falling;
-        }
+            if (rb.velocity.y > 0.1f)
+            {
+                ghostTrail.makeGhost = true;
+                state = MovementState.jumping;
+            }
+            else if (rb.velocity.y < -0.1f)
+            {
+                ghostTrail.makeGhost = true;
+                state = MovementState.falling;
+            }
 
-        anim.SetInteger("state", (int)state);
+            anim.SetInteger("state", (int)state);
+        }
     }
 
     private bool IsGrounded()
